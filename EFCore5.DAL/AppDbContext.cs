@@ -1,4 +1,5 @@
-﻿using EFCore5.Core.Entities;
+﻿using System.Collections.Generic;
+using EFCore5.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCore5.DAL
@@ -17,6 +18,13 @@ namespace EFCore5.DAL
         public AppDbContext(DbContextOptions options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            new PersonEntityTypeConfiguration().Configure(modelBuilder.Entity<Person>());
+
+            modelBuilder.Seed();
         }
     }
 }

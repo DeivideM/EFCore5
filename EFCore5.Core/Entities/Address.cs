@@ -1,4 +1,6 @@
-﻿namespace EFCore5.Core.Entities
+﻿using System;
+
+namespace EFCore5.Core.Entities
 {
     public class Address
     {
@@ -10,5 +12,7 @@
         public string Country { get; set; }
         public string ZipCode { get; set; }
         public int PersonId { get; set; }
+        public Person Person { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }
