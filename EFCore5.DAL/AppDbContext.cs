@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using EFCore5.Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCore5.DAL
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Person> Persons { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -24,6 +26,11 @@ namespace EFCore5.DAL
         {
             new PersonEntityTypeConfiguration().Configure(modelBuilder.Entity<Person>());
             new AddressEntityTypeConfiguration().Configure(modelBuilder.Entity<Address>());
+
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserToken<string>>().HasNoKey();
+
 
             modelBuilder.Seed();
         }
