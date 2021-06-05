@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EFCore5.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,9 +30,9 @@ namespace EFCore5.DAL.Migrations
                 {
                     Person_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
-                    LastName = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
-                    EmailAddress = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
+                    LastName = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
+                    EmailAddress = table.Column<string>(type: "varchar(500)", unicode: false, maxLength: 500, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
@@ -46,14 +46,14 @@ namespace EFCore5.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "varchar(500)", unicode: false, maxLength: 500, nullable: false),
+                    AddressLine2 = table.Column<string>(type: "varchar(500)", unicode: false, maxLength: 500, nullable: true),
+                    City = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
+                    State = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
+                    Country = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
+                    ZipCode = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     PersonId = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 6, 5, 4, 42, 27, 143, DateTimeKind.Local).AddTicks(3230))
                 },
                 constraints: table =>
                 {
@@ -145,18 +145,18 @@ namespace EFCore5.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "CreatedOn", "PersonId", "State", "ZipCode" },
-                values: new object[] { 1, "123 Test St", "", "Beverly Hills", "USA", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "CA", "90210" });
+                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "PersonId", "State", "ZipCode" },
+                values: new object[] { 1, "123 Test St", "", "Beverly Hills", "USA", 1, "CA", "90210" });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "CreatedOn", "PersonId", "State", "ZipCode" },
-                values: new object[] { 2, "123 Michigan Ave", "", "Chicago", "USA", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "IL", "60612" });
+                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "PersonId", "State", "ZipCode" },
+                values: new object[] { 2, "123 Michigan Ave", "", "Chicago", "USA", 2, "IL", "60612" });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "CreatedOn", "PersonId", "State", "ZipCode" },
-                values: new object[] { 3, "100 1St St", "", "Chicago", "USA", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "IL", "60612" });
+                columns: new[] { "Id", "AddressLine1", "AddressLine2", "City", "Country", "PersonId", "State", "ZipCode" },
+                values: new object[] { 3, "100 1St St", "", "Chicago", "USA", 2, "IL", "60612" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_PersonId",

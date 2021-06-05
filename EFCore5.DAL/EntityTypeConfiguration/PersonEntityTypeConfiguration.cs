@@ -18,19 +18,22 @@ namespace EFCore5.DAL
 
             builder
                 .Property(p => p.FirstName)
-                .HasColumnType("varchar(250)")
+                //.HasColumnType("varchar(250)")
+                .IsUnicode(false)
                 .HasMaxLength(250)
                 .IsRequired();
 
             builder
                 .Property(p => p.LastName)
-                .HasColumnType("varchar(250)")
+                //.HasColumnType("varchar(250)")
+                .IsUnicode(false)
                 .HasMaxLength(250)
                 .IsRequired();
 
             builder
               .Property(p => p.EmailAddress)
-              .HasColumnType("varchar(500)")
+              //.HasColumnType("varchar(500)")
+              .IsUnicode(false)
               .HasMaxLength(500)
               .IsRequired();
 

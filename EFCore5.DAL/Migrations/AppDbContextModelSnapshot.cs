@@ -27,28 +27,46 @@ namespace EFCore5.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddressLine1")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(250)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2021, 6, 5, 4, 42, 27, 143, DateTimeKind.Local).AddTicks(3230));
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -441,16 +459,19 @@ namespace EFCore5.DAL.Migrations
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(500)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(500)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(250)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(250)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.HasKey("Id");

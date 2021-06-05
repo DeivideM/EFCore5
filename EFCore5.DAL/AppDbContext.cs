@@ -23,6 +23,7 @@ namespace EFCore5.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new PersonEntityTypeConfiguration().Configure(modelBuilder.Entity<Person>());
+            new AddressEntityTypeConfiguration().Configure(modelBuilder.Entity<Address>());
 
             modelBuilder.Seed();
         }
